@@ -136,20 +136,14 @@ namespace ZumaBesselPath
             InitializeComponent();
         }
 
-        private void LoadButton_Click(object sender, RoutedEventArgs e)
+        private void LoadAI(string fileName)
         {
-            var dialog = new OpenFileDialog();
-            dialog.Filter = "AI曲线文件|*.ai";
-
-            if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
-                return;
-
-            var aiReader = File.OpenText(dialog.FileName);
+            var aiReader = File.OpenText(fileName);
 
             // 读取AI文件
             var isReadingCurve = false;
             var curveData = "";
-            while(!aiReader.EndOfStream)
+            while (!aiReader.EndOfStream)
             {
                 var line = aiReader.ReadLine();
 
@@ -316,6 +310,73 @@ namespace ZumaBesselPath
             // 最终处理
             foreach (var point in pointList)
                 point.y = 480 - point.y;
+        }
+
+        private void LoadTxtPath(string fileName)
+        {
+            pointList = new List<Point>();
+
+            var reader = File.OpenText(fileName);
+
+            double currentX = 0;
+            double currentY = 0;
+
+            while (!reader.EndOfStream)
+            {
+                var line = reader.ReadLine();
+
+                if (line.StartsWith("#"))
+                    continue;
+
+                var args = line.Split(' ');
+                if (args.Length != 4)
+                    continue;
+
+                if (!double.TryParse(args[0], out var x) ||
+                    !double.TryParse(args[1], out var y) ||
+                    !int.TryParse(args[2], out var isTunnel) ||
+                    !int.TryParse(args[3], out var order))
+                {
+                    WarningLabel.Content = "[警告]无法加载文件，文件内有错误";
+                    return;
+                }
+
+                Point point = new Point(x, y)
+                {
+                    isTunnel = isTunnel > 0,
+                    order = order
+                };
+
+                if (pointList.Count != 0)
+                {
+                    point.x /= 100;
+                    point.y /= 100;
+                    point.x += currentX;
+                    point.y += currentY;
+                }
+                currentX = point.x;
+                currentY = point.y;
+
+                pointList.Add(point);
+            }
+        }
+
+        private void LoadButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFileDialog();
+            dialog.Filter = "AI曲线文件|*.ai|文本格式轨道|*.txt";
+
+            if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                return;
+
+            var fileInfo = new FileInfo(dialog.FileName);
+            var extension = fileInfo.Extension.ToLower();
+            if (extension == ".ai")
+                LoadAI(dialog.FileName);
+            else if (extension == ".txt")
+                LoadTxtPath(dialog.FileName);
+            else
+                return;
 
             RedrawPath();
             MessageBox.Show("总点数： " + pointList.Count());
@@ -459,7 +520,8 @@ namespace ZumaBesselPath
             var reader = File.CreateText(dialog.FileName + ".txt");
 
             reader.WriteLine("#Zuma Bessel Generator");
-            reader.WriteLine($"#Version：{Environment.Version}");
+            reader.WriteLine($"#By GSciencce Studio");
+            reader.WriteLine($"#{DateTime.Now.ToString()}");
 
             reader.WriteLine($"{pointList[0].x} {pointList[0].y} 0 0");
 
@@ -484,10 +546,10 @@ namespace ZumaBesselPath
             }
             reader.Close();
 
-            var levelGeneratorPath = Environment.CurrentDirectory + "\\ZumaLevelGenerator.exe";
+            var levelGeneratorPath = Environment.CurrentDirectory + "\\ZumaLevelBuilder.exe";
             if (!File.Exists(levelGeneratorPath))
             {
-                MessageBox.Show("未找到ZumaLevelGenerator.exe，请手动生成");
+                MessageBox.Show("未找到ZumaLevelBuilder.exe，请手动生成");
                 return;
             }
 
@@ -504,11 +566,8 @@ namespace ZumaBesselPath
             MessageBox.Show("由GScience Studio瞎做");
             MessageBox.Show("首先在PS里使用钢笔工具绘制路径", "第一步");
             MessageBox.Show("点击 文件->导出->路径到illustrator", "第二步");
-            MessageBox.Show("打开导出的ai文件，找到\"1 XR\"开头的一行，从下边第一行一直复制到\'N\'上边一行", "第三步");
-            MessageBox.Show("把复制到的内容粘贴到此工具的文本框中。文本框内已经包含一个简单的路径，删除即可", "第四步");
-            MessageBox.Show("点击加载，若显示精度问题，则需要把精度调的更小", "第五步");
-            MessageBox.Show("若未再显示任何错误，则点击导出来导出文本文件", "第六步");
-            MessageBox.Show("使用ZumaLevelGenerator把文本文件生成为二进制文件", "第七步");
+            MessageBox.Show("点击加载，然后选择导出的ai文件。\r若显示精度问题，则需要把精度调的更小，一般不会出现问题", "第三步");
+            MessageBox.Show("点击导出来生成祖玛关卡文件", "第四步");
         }
 
         private void BrushSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

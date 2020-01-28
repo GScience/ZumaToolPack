@@ -175,7 +175,7 @@ namespace ZumaLevelDrawer
                 startPoint = point;
             }
 
-            MessageBox.Show("保存成功，请使用 Zuma Level Generator 生成二进制文件");
+            MessageBox.Show("保存成功，请使用 Zuma Level Builder 生成二进制文件");
 
             file.Close();
         }
