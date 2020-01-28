@@ -1,0 +1,39 @@
+﻿<Window x:Class="ZumaBesselPath.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZumaBesselPath"
+        mc:Ignorable="d"
+        Title="Zuma 曲线载入器 By GScience Studio(一身正气小完能)" Height="545" Width="1050" MouseMove="Windows_MouseMove" ResizeMode="NoResize" Icon="Icon.ico">
+    <Grid>
+        <Canvas x:Name="PreviewCanvas" HorizontalAlignment="Left" Height="480" Margin="10,10,0,0" VerticalAlignment="Top" Width="640" Background="#FFFFE1B6"/>
+        <GroupBox Margin="0,10,10,11.5" HorizontalAlignment="Right" Width="369" Header="AI曲线">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="363*"/>
+                    <RowDefinition Height="95*"/>
+                </Grid.RowDefinitions>
+
+                <TextBox x:Name="BesselTextBox" Margin="10,10,10,26" TextWrapping="Wrap" Text="-36.0000 267.0000 m&#xA;79.0000 371.0000 169.0000 403.0000 v&#xA;259.0000 435.0000 309.0000 436.0000 373.0000 432.0000 c&#xA;437.0000 428.0000 479.0000 414.0000 526.0000 384.0000 c&#xA;573.0000 354.0000 607.0000 306.0000 585.0000 284.0000 c&#xA;563.0000 262.0000 522.0000 301.0000 482.0000 327.0000 c&#xA;442.0000 353.0000 382.0000 378.0000 256.0000 358.0000 c&#xA;130.0000 338.0000 45.0000 261.0000 51.0000 236.0000 c&#xA;57.0000 211.0000 87.0000 202.0000 108.0000 213.0000 c&#xA;129.0000 224.0000 208.0000 294.0000 320.0000 290.0000 c&#xA;432.0000 286.0000 504.0000 238.0000 549.0000 188.0000 c&#xA;594.0000 138.0000 584.0000 111.0000 571.0000 100.0000 c&#xA;558.0000 89.0000 521.0000 113.0000 493.0000 145.0000 c&#xA;465.0000 177.0000 445.0000 218.0000 316.0000 217.0000 c&#xA;187.0000 216.0000 128.0000 142.0000 123.0000 107.0000 c&#xA;118.0000 72.0000 129.0000 89.0000 126.0000 76.0000 c" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" IsReadOnly="True"/>
+                <TextBox x:Name="PrecisionTextBox" TextWrapping="Wrap" Text="0.0001" Margin="0,11.5,170,0" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right" Width="131" TextChanged="PrecisionTextBox_TextChanged" Grid.Row="1"/>
+                <Label Content="精度：" HorizontalAlignment="Right" Margin="0,8,299,0" Grid.Row="1" Height="26" VerticalAlignment="Top"/>
+                <Button x:Name="LoadButton" Content="加载" Margin="0,0,90,7" Click="LoadButton_Click" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom" Grid.Row="1"/>
+                <Label x:Name="WarningLabel" Margin="10,340,10,0" Foreground="Red" Height="26" VerticalAlignment="Top" Grid.RowSpan="2" MouseDown="WarningLabel_MouseDown"/>
+                <Button x:Name="OutputButton" Content="导出" HorizontalAlignment="Right" Margin="0,0,10,7" Width="75" Click="OutputButton_Click" Height="20" VerticalAlignment="Bottom" Grid.Row="1"/>
+                <Button x:Name="HelpButton" Content="帮助" HorizontalAlignment="Right" Margin="0,0,250,7" VerticalAlignment="Bottom" Width="75" Click="HelpButton_Click" Grid.Row="1"/>
+                <Label Content="顺序:" HorizontalAlignment="Right" Margin="0,8,95,0" Width="70" Height="26" VerticalAlignment="Top" Grid.Row="1"/>
+                <TextBox x:Name="OrderTextBox" HorizontalAlignment="Right" Margin="0,11.5,59,0" TextWrapping="Wrap" Text="00" Width="69" Height="23" VerticalAlignment="Top" Grid.Row="1"/>
+                <Label Content="笔刷大小:" HorizontalAlignment="Right" Margin="0,35.5,95,0" Width="70" Height="26" VerticalAlignment="Top" Grid.Row="1"/>
+                <Slider x:Name="BrushSlider" HorizontalAlignment="Right" Margin="0,42,57,0" Width="47" ValueChanged="BrushSlider_ValueChanged" Minimum="10" Maximum="50" Value="10" Height="18" VerticalAlignment="Top" Grid.Row="1"/>
+                <Button x:Name="LoadImageButton" Content="背景" Margin="0,0,170,7" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom" Click="LoadImageButton_Click" Grid.Row="1"/>
+                <CheckBox x:Name="ContinueCheckBox" Content="连续" HorizontalAlignment="Left" Margin="303,43,0,0" Height="16" VerticalAlignment="Top" Grid.Row="1"/>
+                <Label Content="分辨率：" HorizontalAlignment="Right" Margin="0,35,301,0" VerticalAlignment="Top" Grid.Row="1"/>
+                <TextBox x:Name="WidthTextBox" TextWrapping="Wrap" Text="640" Margin="0,37.5,243,0" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right" Width="58" TextChanged="PrecisionTextBox_TextChanged" Grid.Row="1"/>
+                <TextBox x:Name="HeightTextBox" TextWrapping="Wrap" Text="480" Margin="0,37.5,170,0" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right" Width="58" TextChanged="PrecisionTextBox_TextChanged" Grid.Row="1"/>
+                <CheckBox x:Name="TunnelCheckBox" Content="隧道" HorizontalAlignment="Left" Margin="303,14,0,0" Height="16" VerticalAlignment="Top" Grid.Row="1"/>
+            </Grid>
+        </GroupBox>
+        <Ellipse x:Name="BrushEllipse" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10" Margin="124,118,0,0" Stroke="Black" VerticalAlignment="Top" Width="10"/>
+    </Grid>
+</Window>

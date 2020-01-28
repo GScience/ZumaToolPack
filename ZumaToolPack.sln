@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZumaLevelGenerator", "ZumaLevelGenerator\ZumaLevelGenerator.vcxproj", "{E2F2CB3E-CBDB-435E-9C98-B239C4F24D00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZumaLevelPainter", "ZumaLevelPainter\ZumaLevelPainter.csproj", "{14BFD431-1CF3-4995-A282-CAB3803A702C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZumaBesselGenerator", "ZumaBesselGenerator\ZumaBesselGenerator.csproj", "{DD0B6B08-1F25-412E-80AB-95D06E903B6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2F2CB3E-CBDB-435E-9C98-B239C4F24D00}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{E2F2CB3E-CBDB-435E-9C98-B239C4F24D00}.Debug|x64.ActiveCfg = Debug|x64
+		{E2F2CB3E-CBDB-435E-9C98-B239C4F24D00}.Debug|x64.Build.0 = Debug|x64
+		{E2F2CB3E-CBDB-435E-9C98-B239C4F24D00}.Debug|x86.ActiveCfg = Debug|Win32
+		{E2F2CB3E-CBDB-435E-9C98-B239C4F24D00}.Debug|x86.Build.0 = Debug|Win32
+		{E2F2CB3E-CBDB-435E-9C98-B239C4F24D00}.Release|Any CPU.ActiveCfg = Release|Win32
+		{E2F2CB3E-CBDB-435E-9C98-B239C4F24D00}.Release|x64.ActiveCfg = Release|x64
+		{E2F2CB3E-CBDB-435E-9C98-B239C4F24D00}.Release|x64.Build.0 = Release|x64
+		{E2F2CB3E-CBDB-435E-9C98-B239C4F24D00}.Release|x86.ActiveCfg = Release|Win32
+		{E2F2CB3E-CBDB-435E-9C98-B239C4F24D00}.Release|x86.Build.0 = Release|Win32
+		{14BFD431-1CF3-4995-A282-CAB3803A702C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14BFD431-1CF3-4995-A282-CAB3803A702C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14BFD431-1CF3-4995-A282-CAB3803A702C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{14BFD431-1CF3-4995-A282-CAB3803A702C}.Debug|x64.Build.0 = Debug|Any CPU
+		{14BFD431-1CF3-4995-A282-CAB3803A702C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{14BFD431-1CF3-4995-A282-CAB3803A702C}.Debug|x86.Build.0 = Debug|Any CPU
+		{14BFD431-1CF3-4995-A282-CAB3803A702C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14BFD431-1CF3-4995-A282-CAB3803A702C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14BFD431-1CF3-4995-A282-CAB3803A702C}.Release|x64.ActiveCfg = Release|Any CPU
+		{14BFD431-1CF3-4995-A282-CAB3803A702C}.Release|x64.Build.0 = Release|Any CPU
+		{14BFD431-1CF3-4995-A282-CAB3803A702C}.Release|x86.ActiveCfg = Release|Any CPU
+		{14BFD431-1CF3-4995-A282-CAB3803A702C}.Release|x86.Build.0 = Release|Any CPU
+		{DD0B6B08-1F25-412E-80AB-95D06E903B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD0B6B08-1F25-412E-80AB-95D06E903B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD0B6B08-1F25-412E-80AB-95D06E903B6E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DD0B6B08-1F25-412E-80AB-95D06E903B6E}.Debug|x64.Build.0 = Debug|Any CPU
+		{DD0B6B08-1F25-412E-80AB-95D06E903B6E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DD0B6B08-1F25-412E-80AB-95D06E903B6E}.Debug|x86.Build.0 = Debug|Any CPU
+		{DD0B6B08-1F25-412E-80AB-95D06E903B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD0B6B08-1F25-412E-80AB-95D06E903B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD0B6B08-1F25-412E-80AB-95D06E903B6E}.Release|x64.ActiveCfg = Release|Any CPU
+		{DD0B6B08-1F25-412E-80AB-95D06E903B6E}.Release|x64.Build.0 = Release|Any CPU
+		{DD0B6B08-1F25-412E-80AB-95D06E903B6E}.Release|x86.ActiveCfg = Release|Any CPU
+		{DD0B6B08-1F25-412E-80AB-95D06E903B6E}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B8B473D3-0A27-4374-B015-B5F568438077}
+	EndGlobalSection
+EndGlobal

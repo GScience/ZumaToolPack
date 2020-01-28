@@ -1,0 +1,9 @@
+﻿<Application x:Class="ZumaLevelDrawer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ZumaLevelDrawer"
+             StartupUri="ZumaEditor.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
