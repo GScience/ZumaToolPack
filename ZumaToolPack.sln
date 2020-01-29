@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZumaLevelGenerator", "ZumaLevelGenerator\ZumaLevelGenerator.vcxproj", "{E2F2CB3E-CBDB-435E-9C98-B239C4F24D00}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZumaLevelBuilder", "ZumaLevelGenerator\ZumaLevelGenerator.vcxproj", "{E2F2CB3E-CBDB-435E-9C98-B239C4F24D00}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZumaLevelPainter", "ZumaLevelPainter\ZumaLevelPainter.csproj", "{14BFD431-1CF3-4995-A282-CAB3803A702C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZumaBesselGenerator", "ZumaBesselGenerator\ZumaBesselGenerator.csproj", "{DD0B6B08-1F25-412E-80AB-95D06E903B6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZumaBinaryToAi", "ZumaBinaryToAi\ZumaBinaryToAi.csproj", "{D90DF8D0-56F4-4FC0-8FC9-479CB2D62165}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,18 @@ Global
 		{DD0B6B08-1F25-412E-80AB-95D06E903B6E}.Release|x64.Build.0 = Release|Any CPU
 		{DD0B6B08-1F25-412E-80AB-95D06E903B6E}.Release|x86.ActiveCfg = Release|Any CPU
 		{DD0B6B08-1F25-412E-80AB-95D06E903B6E}.Release|x86.Build.0 = Release|Any CPU
+		{D90DF8D0-56F4-4FC0-8FC9-479CB2D62165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D90DF8D0-56F4-4FC0-8FC9-479CB2D62165}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D90DF8D0-56F4-4FC0-8FC9-479CB2D62165}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D90DF8D0-56F4-4FC0-8FC9-479CB2D62165}.Debug|x64.Build.0 = Debug|Any CPU
+		{D90DF8D0-56F4-4FC0-8FC9-479CB2D62165}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D90DF8D0-56F4-4FC0-8FC9-479CB2D62165}.Debug|x86.Build.0 = Debug|Any CPU
+		{D90DF8D0-56F4-4FC0-8FC9-479CB2D62165}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D90DF8D0-56F4-4FC0-8FC9-479CB2D62165}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D90DF8D0-56F4-4FC0-8FC9-479CB2D62165}.Release|x64.ActiveCfg = Release|Any CPU
+		{D90DF8D0-56F4-4FC0-8FC9-479CB2D62165}.Release|x64.Build.0 = Release|Any CPU
+		{D90DF8D0-56F4-4FC0-8FC9-479CB2D62165}.Release|x86.ActiveCfg = Release|Any CPU
+		{D90DF8D0-56F4-4FC0-8FC9-479CB2D62165}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
