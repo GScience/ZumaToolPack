@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Z.Expressions;
 using MessageBox = System.Windows.MessageBox;
 
 namespace ZumaBinaryToAi
@@ -89,6 +90,18 @@ namespace ZumaBinaryToAi
             PointCountLabel.Content = "" + pointList.Count;
         }
 
+        private double DoExpression(string str, double num)
+        {
+            try
+            {
+                return Eval.Execute<double>(str, new { num = num });
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
         private void OutputButton_Click(object sender, RoutedEventArgs e)
         {
             if (pointList == null || pointList.Count == 0)
@@ -103,23 +116,27 @@ namespace ZumaBinaryToAi
 
             var writer = File.CreateText(dialog.FileName);
 
+            var xExpression = XExpressionTextBox.Text;
+            var yExpression = YExpressionTextBox.Text;
+
             double currentPosX = pointList[0].x;
             double currentPosY = pointList[0].y;
 
             writer.WriteLine("%%BoundingBox: 0 0 640 480");
             writer.WriteLine("1 XR");
 
-            writer.WriteLine($"{currentPosX} {currentPosY} m");
+            writer.WriteLine($"{DoExpression(xExpression, currentPosX)} {DoExpression(yExpression, 480 - currentPosY)} m");
 
             for (var i = 1; i < pointList.Count; ++i)
             {
                 currentPosX += pointList[i].x / 100.0;
                 currentPosY += pointList[i].y / 100.0;
-                writer.WriteLine($"{currentPosX} {480 - currentPosY} l");
+                writer.WriteLine($"{DoExpression(xExpression, currentPosX)} {DoExpression(yExpression, 480 - currentPosY)} l");
             }
             writer.WriteLine("N");
             writer.Close();
             MessageBox.Show("导出成功");
+            
         }
     }
 }
