@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ZumaBinaryToAi"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="Title">Zuma 轨道逆向器 By GScience Studio(一身正气小完能)</system:String>
+    <system:String x:Key="LoadButton">加载</system:String>
+    <system:String x:Key="OutputButton">导出</system:String>
+    <system:String x:Key="xExpressoin">X 表达式</system:String>
+    <system:String x:Key="yExpressoin">Y 表达式</system:String>
+
+    <system:String x:Key="RailFile">轨道文件</system:String>
+    <system:String x:Key="AIFile">AI文件</system:String>
+    <system:String x:Key="TextFile">文本文件</system:String>
+
+    <system:String x:Key="Expection">出现异常，生成失败</system:String>
+    <system:String x:Key="ExpectionToolNotFound">未找到ZumaLevelBuilder.exe</system:String>
+</ResourceDictionary>

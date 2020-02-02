@@ -1,0 +1,44 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ZumaBesselGenerator"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="Title">Zuma 轨道编辑器 By GScience Studio(一身正气小完能)</system:String>
+    <system:String x:Key="LoadButton">加载</system:String>
+    <system:String x:Key="OutputButton">导出</system:String>
+    <system:String x:Key="HelpButton">帮助</system:String>
+    <system:String x:Key="BackgroundButton">背景</system:String>
+    <system:String x:Key="BrushSize">笔刷大小</system:String>
+    <system:String x:Key="Tunnel">隧道</system:String>
+    <system:String x:Key="Continue">连续</system:String>
+    <system:String x:Key="Precision">精度</system:String>
+    <system:String x:Key="Resolution">分辨率</system:String>
+    <system:String x:Key="AICurve">AI 曲线信息</system:String>
+    
+    <system:String x:Key="RailFile">轨道文件</system:String>
+    <system:String x:Key="AIFile">AI文件</system:String>
+    <system:String x:Key="TextFile">文本文件</system:String>
+    <system:String x:Key="ImageFile">图像文件</system:String>
+
+    <system:String x:Key="Expection">出现异常，生成失败</system:String>
+    <system:String x:Key="ExpectionError">[错误]</system:String>
+    <system:String x:Key="ExpectionWarn">[警告]</system:String>
+    <system:String x:Key="ExpectionToolNotFound">未找到ZumaLevelBuilder.exe</system:String>
+    <system:String x:Key="ExpectionWrongWidth">宽度非法</system:String>
+    <system:String x:Key="ExpectionWrongHeight">高度非法</system:String>
+    <system:String x:Key="ExpectionWrongCurve">曲线信息出现错误</system:String>
+    <system:String x:Key="ExpectionWrongUnknownCurve">未知曲线信息</system:String>
+    <system:String x:Key="ExpectionWrongLowPrecision">缺失部分中间点，可能无法导出，请修改精度</system:String>
+    <system:String x:Key="ExpectionWrongFileInternalError">无法加载文件，文件内有错误</system:String>
+    <system:String x:Key="ExpectionWrongCantCalculateOffset">生成失败，无法计算偏移量</system:String>
+    <system:String x:Key="ExpectionWrongOrderShouldBeNumber">顺序必须为数字</system:String>
+
+    <system:String x:Key="GenerateStarted">开始生成，程序可能会出现卡顿，请耐心等待</system:String>
+    <system:String x:Key="TotalPoint">总点数：</system:String>
+    <system:String x:Key="PleaseLoadFirst">请先加载</system:String>
+
+    <system:String x:Key="Help1">由GScience Studio瞎做</system:String>
+    <system:String x:Key="Help2">首先在PS里使用钢笔工具绘制路径</system:String>
+    <system:String x:Key="Help3">点击 文件->导出->路径到illustrator</system:String>
+    <system:String x:Key="Help4">点击加载，然后选择导出的ai文件。\r若显示精度问题，则需要把精度调的更小，一般不会出现问题</system:String>
+    <system:String x:Key="Help5">点击导出来生成祖玛关卡文件</system:String>
+</ResourceDictionary>

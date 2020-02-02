@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 
 namespace ZumaBesselPath
@@ -129,10 +130,31 @@ namespace ZumaBesselPath
     /// </summary>
     public partial class MainWindow : Window
     {
+        ResourceDictionary lang;
+
         private List<Point> pointList;
 
         public MainWindow()
         {
+            List<ResourceDictionary> dictionaryList = new List<ResourceDictionary>();
+            foreach (ResourceDictionary dictionary in Application.Current.Resources.MergedDictionaries)
+            {
+                dictionaryList.Add(dictionary);
+            }
+
+            string requestedCulture;
+            if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "zh-CN")
+                requestedCulture = @"Resources\Lang\zh-cn.xaml";
+            else
+                requestedCulture = @"Resources\Lang\en-us.xaml";
+            ResourceDictionary resourceDictionary
+                = dictionaryList.FirstOrDefault(d => d.Source.OriginalString.Equals(requestedCulture));
+
+            Application.Current.Resources.MergedDictionaries.Remove(resourceDictionary);
+            Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+
+            lang = resourceDictionary;
+
             InitializeComponent();
         }
 
@@ -173,13 +195,13 @@ namespace ZumaBesselPath
 
             if (!int.TryParse(WidthTextBox.Text, out var width))
             {
-                WarningLabel.Content = "[错误]宽度非法";
+                WarningLabel.Content = $"{lang["ExpectionError"]}{lang["ExpectionWrongWidth"]}";
                 return;
             }
 
             if (!int.TryParse(HeightTextBox.Text, out var height))
             {
-                WarningLabel.Content = "[错误]高度非法";
+                WarningLabel.Content = $"{lang["ExpectionError"]}{lang["ExpectionWrongHeight"]}";
                 return;
             }
             var reader = new StringReader(BesselTextBox.Text);
@@ -198,7 +220,7 @@ namespace ZumaBesselPath
                     case "m":
                         if (args.Length != 3)
                         {
-                            WarningLabel.Content = "[错误]曲线信息出现错误";
+                            WarningLabel.Content = $"{lang["ExpectionError"]}{lang["ExpectionWrongCurve"]}";
                             return;
                         }
                         paths.Add(
@@ -211,7 +233,7 @@ namespace ZumaBesselPath
                     case "v":
                         if (args.Length != 5)
                         {
-                            WarningLabel.Content = "[错误]曲线信息出现错误";
+                            WarningLabel.Content = $"{lang["ExpectionError"]}{lang["ExpectionWrongCurve"]}";
                             return;
                         }
                         paths.Add(new BesselPath(
@@ -225,7 +247,7 @@ namespace ZumaBesselPath
                     case "y":
                         if (args.Length != 5)
                         {
-                            WarningLabel.Content = "[错误]曲线信息出现错误";
+                            WarningLabel.Content = $"{lang["ExpectionError"]}{lang["ExpectionWrongCurve"]}";
                             return;
                         }
                         paths.Add(new BesselPath(
@@ -239,7 +261,7 @@ namespace ZumaBesselPath
                     case "l":
                         if (args.Length != 3)
                         {
-                            WarningLabel.Content = "[错误]曲线信息出现错误";
+                            WarningLabel.Content = $"{lang["ExpectionError"]}{lang["ExpectionWrongCurve"]}";
                             return;
                         }
                         paths.Add(new LinePath
@@ -252,7 +274,7 @@ namespace ZumaBesselPath
                     case "c":
                         if (args.Length != 7)
                         {
-                            WarningLabel.Content = "[错误]曲线信息出现错误";
+                            WarningLabel.Content = $"{lang["ExpectionError"]}{lang["ExpectionWrongCurve"]}";
                             return;
                         }
                         paths.Add(new BesselPath(
@@ -263,7 +285,7 @@ namespace ZumaBesselPath
                             );
                         break;
                     default:
-                        WarningLabel.Content = "[错误]未知曲线信息" + args[args.Length - 1];
+                        WarningLabel.Content = $"{lang["ExpectionError"]}{lang["ExpectionWrongUnknownCurve"]}{args[args.Length - 1]}";
                         return;
                 }
             }
@@ -273,7 +295,7 @@ namespace ZumaBesselPath
             double precision = double.Parse(PrecisionTextBox.Text);
 
             if (precision < 0.00005)
-                MessageBox.Show("开始生成，程序可能会出现卡顿，请耐心等待");
+                MessageBox.Show(lang["GenerateStarted"].ToString());
 
             if (precision < 0.000001)
                 precision = 0.000001;
@@ -300,7 +322,7 @@ namespace ZumaBesselPath
                     if (deltaLength < 1)
                         continue;
                     if (deltaLength - 1 > 0.1f)
-                        WarningLabel.Content = "[警告]缺失部分中间点，可能无法导出，请修改精度";
+                        WarningLabel.Content = $"{lang["ExpectionWarn"]}{lang["ExpectionWrongLowPrecision"]}";
 
                     deltaLength = 0;
                     pointList.Add(new Point(currentPoint.x, currentPoint.y));
@@ -337,7 +359,7 @@ namespace ZumaBesselPath
                     !int.TryParse(args[2], out var isTunnel) ||
                     !int.TryParse(args[3], out var order))
                 {
-                    WarningLabel.Content = "[警告]无法加载文件，文件内有错误";
+                    WarningLabel.Content = $"{lang["ExpectionWarn"]}{lang["ExpectionWrongFileInternalError"]}";
                     return;
                 }
 
@@ -364,7 +386,7 @@ namespace ZumaBesselPath
         private void LoadButton_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
-            dialog.Filter = "AI曲线文件|*.ai|文本格式轨道|*.txt";
+            dialog.Filter = $"{lang["AIFile"]}|*.ai|{lang["TextFile"]}|*.txt";
 
             if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
@@ -379,7 +401,7 @@ namespace ZumaBesselPath
                 return;
 
             RedrawPath();
-            MessageBox.Show("总点数： " + pointList.Count());
+            MessageBox.Show(lang["TotalPoint"].ToString() + pointList.Count());
         }
 
         private bool isDirty = false;
@@ -508,11 +530,11 @@ namespace ZumaBesselPath
         {
             if (pointList == null)
             {
-                MessageBox.Show("请先加载");
+                MessageBox.Show(lang["PleaseLoadFirst"].ToString());
                 return;
             }
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "轨道文件|*.dat";
+            dialog.Filter = $"{lang["RailFile"]}|*.dat";
 
             if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
@@ -537,7 +559,7 @@ namespace ZumaBesselPath
                 if (offset.x > 255 || offset.x < -256 ||
                     offset.y > 255 || offset.y < -256)
                 {
-                    MessageBox.Show("生成失败，无法计算偏移量");
+                    MessageBox.Show(lang["ExpectionWrongCantCalculateOffset"].ToString());
                     return;
                 }
                 int p1 = currentPoint.isTunnel ? 1 : 0;
@@ -549,25 +571,25 @@ namespace ZumaBesselPath
             var levelGeneratorPath = Environment.CurrentDirectory + "\\ZumaLevelBuilder.exe";
             if (!File.Exists(levelGeneratorPath))
             {
-                MessageBox.Show("未找到ZumaLevelBuilder.exe，请手动生成");
+                MessageBox.Show(lang["ExpectionToolNotFound"].ToString());
                 return;
             }
 
             var process = Process.Start(levelGeneratorPath, $"\"{dialog.FileName + ".txt"}\" \"{dialog.FileName}\"");
             if (!process.WaitForExit(10000) || process.ExitCode != 0)
             {
-                MessageBox.Show("出现异常，生成失败");
+                MessageBox.Show(lang["Expection"].ToString());
                 process.Kill();
             }
         }
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("由GScience Studio瞎做");
-            MessageBox.Show("首先在PS里使用钢笔工具绘制路径", "第一步");
-            MessageBox.Show("点击 文件->导出->路径到illustrator", "第二步");
-            MessageBox.Show("点击加载，然后选择导出的ai文件。\r若显示精度问题，则需要把精度调的更小，一般不会出现问题", "第三步");
-            MessageBox.Show("点击导出来生成祖玛关卡文件", "第四步");
+            MessageBox.Show(lang["Help1"].ToString());
+            MessageBox.Show(lang["Help2"].ToString(), "1");
+            MessageBox.Show(lang["Help3"].ToString(), "2");
+            MessageBox.Show(lang["Help4"].ToString(), "3");
+            MessageBox.Show(lang["Help5"].ToString(), "4");
         }
 
         private void BrushSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -597,7 +619,7 @@ namespace ZumaBesselPath
 
             if (!int.TryParse(OrderTextBox.Text, out var order))
             {
-                WarningLabel.Content = "[错误]顺序必须为数字";
+                WarningLabel.Content = $"{lang["ExpectionError"]}{lang["ExpectionWrongOrderShouldBeNumber"]}";
                 return;
             }
 
@@ -639,7 +661,7 @@ namespace ZumaBesselPath
         private void LoadImageButton_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
-            dialog.Filter = "图像文件|*.png;*.jpg;*.gif";
+            dialog.Filter = $"{lang["ImageFile"]}|*.png;*.jpg;*.gif";
 
             if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;

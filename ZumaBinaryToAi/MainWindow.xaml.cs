@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Z.Expressions;
+using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 
 namespace ZumaBinaryToAi
@@ -25,6 +26,8 @@ namespace ZumaBinaryToAi
     /// </summary>
     public partial class MainWindow : Window
     {
+        ResourceDictionary lang;
+
         private struct Point
         {
             public double x;
@@ -35,6 +38,25 @@ namespace ZumaBinaryToAi
 
         public MainWindow()
         {
+            List<ResourceDictionary> dictionaryList = new List<ResourceDictionary>();
+            foreach (ResourceDictionary dictionary in Application.Current.Resources.MergedDictionaries)
+            {
+                dictionaryList.Add(dictionary);
+            }
+
+            string requestedCulture;
+            if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "zh-CN")
+                requestedCulture = @"Resources\Lang\zh-cn.xaml";
+            else
+                requestedCulture = @"Resources\Lang\en-us.xaml";
+            ResourceDictionary resourceDictionary 
+                = dictionaryList.FirstOrDefault(d => d.Source.OriginalString.Equals(requestedCulture));
+
+            Application.Current.Resources.MergedDictionaries.Remove(resourceDictionary);
+            Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+
+            lang = resourceDictionary;
+
             InitializeComponent();
         }
 
@@ -44,7 +66,7 @@ namespace ZumaBinaryToAi
         {
             var dialog = new OpenFileDialog();
 
-            dialog.Filter = "轨道文件|*.dat";
+            dialog.Filter = $"{lang["RailFile"]}| *.dat";
 
             if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
@@ -52,14 +74,14 @@ namespace ZumaBinaryToAi
             var levelGeneratorPath = Environment.CurrentDirectory + "\\ZumaLevelBuilder.exe";
             if (!File.Exists(levelGeneratorPath))
             {
-                MessageBox.Show("未找到ZumaLevelBuilder.exe");
+                MessageBox.Show(lang["ExpectionToolNotFound"].ToString());
                 return;
             }
-
+            
             var process = Process.Start(levelGeneratorPath, $"\"{dialog.FileName}\" \"{dialog.FileName + ".txt"}\" btt");
             if (!process.WaitForExit(10000) || process.ExitCode != 0)
             {
-                MessageBox.Show("出现异常，生成失败");
+                MessageBox.Show(lang["Expection"].ToString());
                 process.Kill();
                 return;
             }
@@ -90,11 +112,11 @@ namespace ZumaBinaryToAi
             PointCountLabel.Content = "" + pointList.Count;
         }
 
-        private double DoExpression(string str, double num)
+        private double DoExpression(string str, double x, double y)
         {
             try
             {
-                return Eval.Execute<double>(str, new { num = num });
+                return Eval.Execute<double>(str, new { x = x, y = y });
             }
             catch
             {
@@ -109,7 +131,7 @@ namespace ZumaBinaryToAi
 
             var dialog = new SaveFileDialog();
 
-            dialog.Filter = "AI曲线|*.ai";
+            dialog.Filter = $"{lang["AIFile"]}|*.ai";
 
             if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
@@ -125,13 +147,13 @@ namespace ZumaBinaryToAi
             writer.WriteLine("%%BoundingBox: 0 0 640 480");
             writer.WriteLine("1 XR");
 
-            writer.WriteLine($"{DoExpression(xExpression, currentPosX)} {DoExpression(yExpression, 480 - currentPosY)} m");
+            writer.WriteLine($"{DoExpression(xExpression, currentPosX, 480 - currentPosY)} {DoExpression(yExpression, currentPosX, 480 - currentPosY)} m");
 
             for (var i = 1; i < pointList.Count; ++i)
             {
                 currentPosX += pointList[i].x / 100.0;
                 currentPosY += pointList[i].y / 100.0;
-                writer.WriteLine($"{DoExpression(xExpression, currentPosX)} {DoExpression(yExpression, 480 - currentPosY)} l");
+                writer.WriteLine($"{DoExpression(xExpression, currentPosX, 480 - currentPosY)} {DoExpression(yExpression, currentPosX, 480 - currentPosY)} l");
             }
             writer.WriteLine("N");
             writer.Close();
