@@ -65,7 +65,7 @@ zumaPath read_binary(const std::string& file)
 
 	if (!check_head(head))
 	{
-		std::cout << "头部与祖玛路径文件不匹配" << std::endl;
+		std::cout << "Header does not match zuma path file" << std::endl;
 		return path;
 	}
 
@@ -161,7 +161,7 @@ zumaPath read_text(const std::string& file)
 
 		if (args.size() != 4)
 		{
-			std::cout << "[错误]发现错误行，行号：" << lineCount << std::endl;
+			std::cout << "[Error] Error line found, line number:" << lineCount << std::endl;
 			continue;
 		}
 
@@ -219,8 +219,8 @@ void create_binary(const std::string& file, std::string credit, std::vector<poin
 
 	// 使用关键点位置来写版权信息
 	credit = std::string(
-				"\r\r\t===由GScienceStudio(一身正气小完能)制作===\r\r") +
-				"\t版本：1.4.0\r" + credit;
+				"MadeByGScienceStudio(一身正气小完能)&TranslatedByDeathknight") +
+				"\tVersion：1.4.0\r" + credit;
 
 	while (credit.size() % 10 != 0)
 		credit += '\0';
@@ -264,26 +264,26 @@ void create_binary(const std::string& file, std::string credit, std::vector<poin
 
 void ttb(const std::string& inFile, const std::string& outFile)
 {
-	std::cout << "加载文件中" << std::endl;
+	std::cout << "Loading file" << std::endl;
 
 	auto zumaPath = read_text(inFile);
 
-	std::cout << "总共有路径点： " << zumaPath.points.size() << std::endl;
+	std::cout << "Total common waypoints: " << zumaPath.points.size() << std::endl;
 
-	std::cout << "生成二进制文件" << std::endl;
+	std::cout << "Generate binary files" << std::endl;
 
 	create_binary(outFile, zumaPath.credit, zumaPath.points);
 }
 
 void btt(const std::string& inFile, const std::string& outFile)
 {
-	std::cout << "加载文件中" << std::endl;
+	std::cout << "Loading file" << std::endl;
 
 	auto zumaPath = read_binary(inFile);
 
-	std::cout << "总共有路径点： " << zumaPath.points.size() << std::endl;
+	std::cout << "Total common waypoints: " << zumaPath.points.size() << std::endl;
 
-	std::cout << "生成文本文件" << std::endl;
+	std::cout << "Generate text file" << std::endl;
 
 	create_text(outFile, zumaPath.points);
 }
@@ -292,7 +292,7 @@ int main(int argc, char* argv[])
 {
 	std::cout
 		<< "==============" << std::endl
-		<< "由GScience Studio制作" << std::endl
+		<< "Made By GScience Studio, Translated by DeathKnight" << std::endl
 		<< "==============" << std::endl;
 
 	std::string inFile;
@@ -302,17 +302,17 @@ int main(int argc, char* argv[])
 
 	if (argc == 1)
 	{
-		std::cout << "支持命令行模式：ZumaLevelGenerator [输入文件] [输出文件] <模式>" << std::endl;
-		std::cout << "模式:" << std::endl;
-		std::cout << "ttb: 从文本格式轨道到二进制轨道" << std::endl;
-		std::cout << "btt: 从二进制轨道到文本格式轨道" << std::endl;
+		std::cout << "Support command line mode: ZumaLevelGenerator [input file] [output file] <mode>" << std::endl;
+		std::cout << "mode:" << std::endl;
+		std::cout << "ttb: From text format track to binary track" << std::endl;
+		std::cout << "btt: From binary track to text format track" << std::endl;
 
-		std::cout << "输入文件名" << std::endl;
+		std::cout << "Enter file name: eg:[<name>.txt]" << std::endl;
 		std::getline(std::cin, inFile);
-		std::cout << "输出文件名" << std::endl;
+		std::cout << "Output file name: eg:[<name>.dat]" << std::endl;
 		std::getline(std::cin, outFile);
 
-		std::cout << "模式（默认ttb）" << std::endl;
+		std::cout << "Mode (default ttb): " << std::endl;
 
 		std::getline(std::cin, mode);
 
@@ -332,7 +332,7 @@ int main(int argc, char* argv[])
 	}
 	else
 	{
-		std::cout << "使用方式： ZumaLevelGenerator [输入文件] [输出文件] <b|t>" << std::endl;
+		std::cout << "Use method: ZumaLevelGenerator [input file] [output file] <b | t>" << std::endl;
 		return 0;
 	}
 
@@ -343,7 +343,7 @@ int main(int argc, char* argv[])
 
 	if (mode == "ttb")
 	{
-		std::cout << "当前模式：ttb。从txt到binary" << std::endl;
+		std::cout << "Current mode: ttb. From txt to binary" << std::endl;
 
 		try
 		{
@@ -351,12 +351,12 @@ int main(int argc, char* argv[])
 		}
 		catch (std::exception e)
 		{
-			std::cout << "出现错误" << std::endl;
+			std::cout << "An error occurred" << std::endl;
 		}
 	}
 	else if (mode == "btt")
 	{
-		std::cout << "当前模式：btt。从binary到txt" << std::endl;
+		std::cout << "Current mode: btt. From binary to txt" << std::endl;
 
 		try
 		{
@@ -364,9 +364,9 @@ int main(int argc, char* argv[])
 		}
 		catch (std::exception e)
 		{
-			std::cout << "出现错误" << std::endl;
+			std::cout << "An error occurred" << std::endl;
 		}
 	}
 	else
-		std::cout << "参数错误，未知参数 " << mode << std::endl;
+		std::cout << "Parameter error: unknown parameter " << mode << std::endl;
 }

@@ -6,9 +6,9 @@
     <system:String x:Key="LoadButton">Load</system:String>
     <system:String x:Key="OutputButton">Output</system:String>
     <system:String x:Key="xExpressoin">X expression</system:String>
-    <system:String x:Key="yExpressoin">Y xpression</system:String>
+    <system:String x:Key="yExpressoin">Y expression</system:String>
 
-    <system:String x:Key="RailFile">Rail File</system:String>
+    <system:String x:Key="RailFile">DAT File</system:String>
     <system:String x:Key="AIFile">AI File</system:String>
     <system:String x:Key="TextFile">Text File</system:String>
 

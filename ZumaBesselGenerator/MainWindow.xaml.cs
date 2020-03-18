@@ -542,7 +542,7 @@ namespace ZumaBesselPath
             var reader = File.CreateText(dialog.FileName + ".txt");
 
             reader.WriteLine("#Zuma Bessel Generator");
-            reader.WriteLine($"#By GSciencce Studio");
+            reader.WriteLine($"#By GScience Studio(一身正气小完能) and Translated by DeathKnight");
             reader.WriteLine($"#{DateTime.Now.ToString()}");
 
             reader.WriteLine($"{pointList[0].x} {pointList[0].y} 0 0");

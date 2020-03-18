@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D90DF8D0-56F4-4FC0-8FC9-479CB2D62165}</ProjectGuid>
+    <ProjectGuid>{20DC7AC3-7FA8-4AE6-BFBA-F666BEC3C4A4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ZumaBinaryToAi</RootNamespace>
     <AssemblyName>ZumaBinaryToAi</AssemblyName>

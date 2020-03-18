@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:ZumaBesselGenerator"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
-    <system:String x:Key="Title">Zuma 轨道编辑器 By GScience Studio(一身正气小完能)</system:String>
+    <system:String x:Key="Title">Zuma 轨道编辑器 By DeathKnight</system:String>
     <system:String x:Key="LoadButton">加载</system:String>
     <system:String x:Key="OutputButton">导出</system:String>
     <system:String x:Key="HelpButton">帮助</system:String>
@@ -36,7 +36,7 @@
     <system:String x:Key="TotalPoint">总点数：</system:String>
     <system:String x:Key="PleaseLoadFirst">请先加载</system:String>
 
-    <system:String x:Key="Help1">由GScience Studio瞎做</system:String>
+    <system:String x:Key="Help1">由DeathKnight</system:String>
     <system:String x:Key="Help2">首先在PS里使用钢笔工具绘制路径</system:String>
     <system:String x:Key="Help3">点击 文件->导出->路径到illustrator</system:String>
     <system:String x:Key="Help4">点击加载，然后选择导出的ai文件。\r若显示精度问题，则需要把精度调的更小，一般不会出现问题</system:String>

@@ -157,7 +157,7 @@ namespace ZumaBinaryToAi
             }
             writer.WriteLine("N");
             writer.Close();
-            MessageBox.Show("导出成功");
+            MessageBox.Show("Export Succeeded!");
             
         }
     }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZumaLevelDrawer"
         mc:Ignorable="d"
-        Title="Zuma 关卡绘制器 By GScience Studio(一身正气小完能)" Height="550" Width="880" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp" Icon="Icon.ico">
+        Title="Zuma Path Maker By GScience Studio, Translated by DeathKnight" Height="550" Width="880" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp" Icon="Icon.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="82*"/>
@@ -13,17 +13,18 @@
         </Grid.ColumnDefinitions>
         <Canvas x:Name="EditorCanvas" HorizontalAlignment="Left" Height="480" VerticalAlignment="Top" Width="640
                 " Margin="0,10,0,0" Background="Black" MouseMove="EditorCanvas_MouseMove"/>
-        <Button x:Name="SetPreviewButton" Content="加载参考图像" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="90" Grid.Column="1" Click="SetPreviewButton_Click" Height="25"/>
-        <Button x:Name="ClearPointButton" Content="清空" HorizontalAlignment="Left" Margin="116,10,0,0" VerticalAlignment="Top" Width="90" Grid.Column="1" Height="25" Click="ClearPointButton_Click"/>
-        <Button x:Name="GenerateButton" Content="生成" HorizontalAlignment="Left" Margin="95,465,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1" Height="25" Click="GenerateButton_Click"/>
-        <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" Height="272" Grid.Column="1" Margin="12,178,10,0"><Run Text="帮助：&#xA;加载参考图像后，直接在图像上绘制曲线"/><Run Text="，然后按生成可生成文本格式的曲线。"/><LineBreak/><Run/><LineBreak/><Run Text="关于曲线绘制："/><LineBreak/><Run Text="按下左键后拖动鼠标即可绘制。"/><LineBreak/><Run/><LineBreak/><Run Text="关于图层切换："/><LineBreak/><Run Text="默认第0层，"/><Run Text="按住Tab可以切换到第1层"/><LineBreak/><Run/><LineBreak/><Run Text="关于是否能被打中："/><LineBreak/><Run Text="按下"/><Run Text="Shift"/><Run Text="后绘制的曲线不可被打中。"/></TextBlock>
-        <Label Content="当前层：" Grid.Column="1" HorizontalAlignment="Left" Margin="12,123,0,0" VerticalAlignment="Top" Width="60" Height="25"/>
-        <Label Content="是否可击中：" Grid.Column="1" HorizontalAlignment="Left" Margin="12,148,0,0" VerticalAlignment="Top" Width="88" Height="25"/>
-        <Label x:Name="LayerLabel" Content="0" Grid.Column="1" HorizontalAlignment="Left" Margin="105,123,0,0" VerticalAlignment="Top" Height="25" Width="17"/>
-        <Label x:Name="CanHitLabel" Content="是" Grid.Column="1" HorizontalAlignment="Left" Margin="105,148,0,0" VerticalAlignment="Top" Height="25" Width="22"/>
-        <TextBox x:Name="PrecisionTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="77,41,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="129" InputMethod.IsInputMethodEnabled="False" TextChanged="PrecisionTextBox_TextChanged"/>
-        <Label Content="路径精度：" Grid.Column="1" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="62" Height="25"/>
-        <Label Content="指鼠标最小的移动距离" Grid.Column="1" HorizontalAlignment="Left" Margin="32,65,0,0" VerticalAlignment="Top" Width="174"/>
+        <Button x:Name="SetPreviewButton" Content="Load Image" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="90" Grid.Column="1" Click="SetPreviewButton_Click" Height="25"/>
+        <Button x:Name="ClearPointButton" Content="Reset" HorizontalAlignment="Left" Margin="116,10,0,0" VerticalAlignment="Top" Width="90" Grid.Column="1" Height="25" Click="ClearPointButton_Click"/>
+        <Button x:Name="GenerateButton" Content="Generate .TXT" HorizontalAlignment="Left" Margin="7.4,472,0,0" VerticalAlignment="Top" Width="90" Height="25" Click="GenerateButton_Click" Grid.Column="1"/>
+        <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" Height="272" Grid.Column="1" Margin="12,178,10,0"><Run Text="Help:"/><LineBreak/><Run Text="After loading the reference image, draw a curve directly on the image and press Generate to generate a curve in text format."/><LineBreak/><Run/><LineBreak/><Run Text="About curve drawing:"/><LineBreak/><Run Text="After pressing the left button, drag the mouse to draw."/><LineBreak/><Run/><LineBreak/><Run Text="About layer switching:"/><LineBreak/><Run Text="The default is layer 0. Press Tab to switch to layer 1."/><LineBreak/><Run/><LineBreak/><Run Text="Regarding whether it can be hit:"/><LineBreak/><Run Text="The curve drawn after pressing Shift cannot be hit."/></TextBlock>
+        <Label Content="Current layer:" Grid.Column="1" HorizontalAlignment="Left" Margin="13.4,123,0,0" VerticalAlignment="Top" Width="86" Height="25"/>
+        <Label Content="Whether it can be hit:" Grid.Column="1" HorizontalAlignment="Left" Margin="11.4,148,0,0" VerticalAlignment="Top" Width="129" Height="25"/>
+        <Label x:Name="LayerLabel" Content="0" Grid.Column="1" HorizontalAlignment="Left" Margin="155.4,123,0,0" VerticalAlignment="Top" Height="25" Width="17" RenderTransformOrigin="3.357,0.539"/>
+        <Label x:Name="CanHitLabel" Content="Yes" Grid.Column="1" HorizontalAlignment="Left" Margin="155.4,148,0,0" VerticalAlignment="Top" Height="25" Width="29" RenderTransformOrigin="3.394,0.656"/>
+        <TextBox x:Name="PrecisionTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="102.4,41,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="104" InputMethod.IsInputMethodEnabled="False" TextChanged="PrecisionTextBox_TextChanged"/>
+        <Label Content="Path accuracy:" Grid.Column="1" HorizontalAlignment="Left" Margin="10.4,40,0,0" VerticalAlignment="Top" Width="87" Height="25"/>
+        <Label Content="Refers to the minimum &#xD;&#xA;movement distance &#xD;&#xA;of the mouse" Grid.Column="1" HorizontalAlignment="Left" Margin="13.4,65,0,0" VerticalAlignment="Top" Width="174" Height="53" FontSize="11"/>
+        <Button x:Name="GenerateButton_Copy" Content="Generate .DAT" HorizontalAlignment="Left" Margin="116.4,472,0,0" VerticalAlignment="Top" Width="90" Grid.Column="1" Height="25" Click="GenerateButton2_Click"/>
 
     </Grid>
 </Window>

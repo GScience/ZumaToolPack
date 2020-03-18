@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DD0B6B08-1F25-412E-80AB-95D06E903B6E}</ProjectGuid>
+    <ProjectGuid>{AFD65CA2-F1AF-40B4-9457-44310109A07E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ZumaBesselGenerator</RootNamespace>
     <AssemblyName>ZumaBesselGenerator</AssemblyName>
