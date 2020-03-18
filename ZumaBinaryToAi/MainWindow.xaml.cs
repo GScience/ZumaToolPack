@@ -17,6 +17,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Z.Expressions;
 using Application = System.Windows.Application;
+using DataFormats = System.Windows.DataFormats;
+using DragDropEffects = System.Windows.DragDropEffects;
 using MessageBox = System.Windows.MessageBox;
 
 namespace ZumaBinaryToAi
@@ -35,6 +37,8 @@ namespace ZumaBinaryToAi
             public int canHit;
             public int layer;
         }
+
+        private string fileName;
 
         public MainWindow()
         {
@@ -71,14 +75,33 @@ namespace ZumaBinaryToAi
             if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
 
+            LoadFile(dialog.FileName);
+        }
+
+        private double DoExpression(string str, double x, double y)
+        {
+            try
+            {
+                return Eval.Execute<double>(str, new { x = x, y = y });
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        private void LoadFile(string filePath)
+        {
+            fileName = filePath;
+
             var levelGeneratorPath = Environment.CurrentDirectory + "\\ZumaLevelBuilder.exe";
             if (!File.Exists(levelGeneratorPath))
             {
                 MessageBox.Show(lang["ExpectionToolNotFound"].ToString());
                 return;
             }
-            
-            var process = Process.Start(levelGeneratorPath, $"\"{dialog.FileName}\" \"{dialog.FileName + ".txt"}\" btt");
+
+            var process = Process.Start(levelGeneratorPath, $"\"{filePath}\" \"{filePath + ".txt"}\" btt");
             if (!process.WaitForExit(10000) || process.ExitCode != 0)
             {
                 MessageBox.Show(lang["Expection"].ToString());
@@ -86,7 +109,7 @@ namespace ZumaBinaryToAi
                 return;
             }
 
-            var reader = File.OpenText(dialog.FileName + ".txt");
+            var reader = File.OpenText(filePath + ".txt");
 
             pointList = new List<Point>();
 
@@ -110,17 +133,59 @@ namespace ZumaBinaryToAi
             reader.Close();
 
             PointCountLabel.Content = "" + pointList.Count;
+            ToTextBox.Text = "" + pointList.Count;
         }
 
-        private double DoExpression(string str, double x, double y)
+        private void GenAI(string filePath, List<Point> points)
         {
-            try
+            var writer = File.CreateText(filePath);
+            writer.WriteLine("%%BoundingBox: 0 0 640 480");
+            writer.WriteLine("1 XR");
+
+            writer.WriteLine($"{points[0].x} {480 - points[0].y} m");
+
+            for (var i = 1; i < points.Count; ++i)
+                writer.WriteLine($"{points[i].x} {480 - points[i].y} l");
+
+            writer.WriteLine("N");
+            writer.Close();
+        }
+
+        private void GenDat(string filePath, List<Point> points)
+        {
+            var writer = File.CreateText(filePath + ".txt");
+            writer.WriteLine("# By Zuma Binary To AI");
+
+            double lastPointX;
+            double lastPointY;
+
+            writer.WriteLine($"{points[0].x} {points[0].y} {points[0].canHit} {points[0].layer}");
+
+            lastPointX = points[0].x;
+            lastPointY = points[0].y;
+
+            for (var i = 1; i < points.Count; ++i)
             {
-                return Eval.Execute<double>(str, new { x = x, y = y });
+                writer.WriteLine($"{(points[i].x - lastPointX) * 100} {(points[i].y - lastPointY) * 100} {points[i].canHit} {points[i].layer}");
+                lastPointX = points[i].x;
+                lastPointY = points[i].y;
             }
-            catch
+
+            writer.Close();
+
+            var levelGeneratorPath = Environment.CurrentDirectory + "\\ZumaLevelBuilder.exe";
+            if (!File.Exists(levelGeneratorPath))
             {
-                return 0;
+                MessageBox.Show(lang["ExpectionToolNotFound"].ToString());
+                return;
+            }
+
+            var process = Process.Start(levelGeneratorPath, $"\"{filePath + ".txt"}\" \"{filePath}\" ttb");
+            if (!process.WaitForExit(10000) || process.ExitCode != 0)
+            {
+                MessageBox.Show(lang["Expection"].ToString());
+                process.Kill();
+                return;
             }
         }
 
@@ -131,12 +196,15 @@ namespace ZumaBinaryToAi
 
             var dialog = new SaveFileDialog();
 
-            dialog.Filter = $"{lang["AIFile"]}|*.ai";
+            dialog.Filter = $"{lang["RailFile"]}|*.dat|{lang["AIFile"]}|*.ai";
+            var fileInfo = new FileInfo(fileName);
+            dialog.InitialDirectory = fileInfo.DirectoryName;
+            dialog.FileName = fileInfo.Name;
 
             if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
 
-            var writer = File.CreateText(dialog.FileName);
+            var realPointList = new List<Point>();
 
             var xExpression = XExpressionTextBox.Text;
             var yExpression = YExpressionTextBox.Text;
@@ -144,21 +212,67 @@ namespace ZumaBinaryToAi
             double currentPosX = pointList[0].x;
             double currentPosY = pointList[0].y;
 
-            writer.WriteLine("%%BoundingBox: 0 0 640 480");
-            writer.WriteLine("1 XR");
-
-            writer.WriteLine($"{DoExpression(xExpression, currentPosX, 480 - currentPosY)} {DoExpression(yExpression, currentPosX, 480 - currentPosY)} m");
+            realPointList.Add(new Point
+            {
+                x = DoExpression(xExpression, currentPosX, currentPosY),
+                y = DoExpression(yExpression, currentPosX, currentPosY),
+                canHit = pointList[0].canHit,
+                layer = pointList[0].layer
+            });
 
             for (var i = 1; i < pointList.Count; ++i)
             {
                 currentPosX += pointList[i].x / 100.0;
                 currentPosY += pointList[i].y / 100.0;
-                writer.WriteLine($"{DoExpression(xExpression, currentPosX, 480 - currentPosY)} {DoExpression(yExpression, currentPosX, 480 - currentPosY)} l");
+
+                realPointList.Add(new Point
+                {
+                    x = DoExpression(xExpression, currentPosX, currentPosY),
+                    y = DoExpression(yExpression, currentPosX, currentPosY),
+                    canHit = pointList[i].canHit,
+                    layer = pointList[i].layer
+                });
             }
-            writer.WriteLine("N");
-            writer.Close();
+
+            if (!int.TryParse(FromTextBox.Text, out var from))
+                MessageBox.Show("范围非法");
+
+            if (!int.TryParse(ToTextBox.Text, out var to))
+                MessageBox.Show("范围非法");
+
+            if (from >= to)
+                MessageBox.Show("范围非法");
+
+            if (to >= realPointList.Count)
+                MessageBox.Show("范围非法");
+
+            realPointList = realPointList.GetRange(from, to);
+
+            if (InvertCheckBox.IsChecked == true)
+                realPointList.Reverse();
+
+            var extension = new FileInfo(dialog.FileName).Extension;
+
+            if (extension == ".ai")
+                GenAI(dialog.FileName, realPointList);
+            else if (extension == ".dat")
+                GenDat(dialog.FileName, realPointList);
             MessageBox.Show("导出成功");
             
+        }
+
+        private void Window_DragEnter(object sender, System.Windows.DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effects = DragDropEffects.Link;
+            else
+                e.Effects = DragDropEffects.None;
+        }
+
+        private void Window_Drop(object sender, System.Windows.DragEventArgs e)
+        {
+            var file = (Array)e.Data.GetData(DataFormats.FileDrop);
+            LoadFile(file.GetValue(0).ToString());
         }
     }
 }
