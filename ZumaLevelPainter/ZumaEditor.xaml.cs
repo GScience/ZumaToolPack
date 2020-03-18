@@ -244,12 +244,19 @@ namespace ZumaLevelDrawer
             }
 
             MessageBox.Show("Saved successfully, press OK to generate .dat file");
-            ProcessStartInfo start = new ProcessStartInfo();
+            var levelGeneratorPath = Environment.CurrentDirectory+"\\ZumaLevelBuilder.exe";
+            if (!File.Exists(levelGeneratorPath))
+            {
+                MessageBox.Show(lang["ExpectionToolNotFound"].ToString());
+                return;
+            }
             string name = dialog.FileName;
             name = name.Replace(".txt", "");
-            start.Arguments = name + ".txt " + name + ".dat ttb";
-            start.FileName = "ZumaLevelBuilder.exe";
-            Process proc = Process.Start(start);
+            var process = Process.Start(levelGeneratorPath, $"\"{name + ".txt"}\" \"{name}\"");
+            if (!process.WaitForExit(10000) || process.ExitCode != 0)
+            {
+                process.Kill();
+            }
             file.Close();
         }
         private void RefreshCurrentState()

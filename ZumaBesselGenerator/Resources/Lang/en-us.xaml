@@ -22,7 +22,7 @@
     <system:String x:Key="Expection">Unknown exception has found</system:String>
     <system:String x:Key="ExpectionError">[Error]</system:String>
     <system:String x:Key="ExpectionWarn">[Warning]</system:String>
-    <system:String x:Key="ExpectionToolNotFound">Unable to found ZumaLevelBuilder.exe</system:String>
+    <system:String x:Key="ExpectionToolNotFound">Unable to find ZumaLevelBuilder.exe</system:String>
     <system:String x:Key="ExpectionWrongWidth">Illegal width</system:String>
     <system:String x:Key="ExpectionWrongHeight">Illegal height</system:String>
     <system:String x:Key="ExpectionWrongCurve">Error has been found in the .AI curve</system:String>

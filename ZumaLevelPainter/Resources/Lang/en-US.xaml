@@ -21,6 +21,7 @@ The curve drawn after holding Shift cannot be hit.
     <system:String x:Key="PathAccuracyText" xml:space="preserve">Refers to the minimum 
 movement distance of the
 mouse</system:String>
+    <system:String x:Key="ExpectionToolNotFound">Unable to find ZumaLevelBuilder.exe</system:String>
     <system:String x:Key="ClearPointButton">Clear</system:String>
     <system:String x:Key="SetPreviewButton">Load Image</system:String>
     <system:String x:Key="GenerateTXTButton">Generate .TXT</system:String>

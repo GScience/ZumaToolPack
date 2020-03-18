@@ -18,6 +18,7 @@
     <system:String x:Key="Hit">是否可击中：</system:String>
     <system:String x:Key="PathAccuracy">路径精度：</system:String>
     <system:String x:Key="PathAccuracyText">指鼠标最小的移动距离</system:String>
+    <system:String x:Key="ExpectionToolNotFound">未找到ZumaLevelBuilder.exe</system:String>
     <system:String x:Key="ClearPointButton">清空</system:String>
     <system:String x:Key="SetPreviewButton">加载参考图像</system:String>
     <system:String x:Key="GenerateTXTButton">生成 .TXT</system:String>

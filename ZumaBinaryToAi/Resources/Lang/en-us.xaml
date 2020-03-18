@@ -13,5 +13,5 @@
     <system:String x:Key="TextFile">Text File</system:String>
 
     <system:String x:Key="Expection">Unknown exception has occurred</system:String>
-    <system:String x:Key="ExpectionToolNotFound">Unable to found ZumaLevelBuilder.exe</system:String>
+    <system:String x:Key="ExpectionToolNotFound">Unable to find ZumaLevelBuilder.exe</system:String>
 </ResourceDictionary>
