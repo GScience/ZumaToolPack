@@ -2,16 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:ZumaBinaryToAi"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
-    <system:String x:Key="Title">Zuma PathReverser By GScience Studio(一身正气小完能)</system:String>
+    <system:String x:Key="Title">Zuma PathReverser By GScience Studio(一身正气小完能), Translated by DeathKnight</system:String>
     <system:String x:Key="LoadButton">Load</system:String>
     <system:String x:Key="OutputButton">Output</system:String>
     <system:String x:Key="xExpressoin">X expression</system:String>
-    <system:String x:Key="yExpressoin">Y xpression</system:String>
+    <system:String x:Key="yExpressoin">Y expression</system:String>
 
-    <system:String x:Key="RailFile">Rail File</system:String>
+    <system:String x:Key="RailFile">DAT File</system:String>
     <system:String x:Key="AIFile">AI File</system:String>
     <system:String x:Key="TextFile">Text File</system:String>
 
-    <system:String x:Key="Expection">Unknown exception has found</system:String>
+    <system:String x:Key="Expection">Unknown exception has occurred</system:String>
     <system:String x:Key="ExpectionToolNotFound">Unable to found ZumaLevelBuilder.exe</system:String>
 </ResourceDictionary>

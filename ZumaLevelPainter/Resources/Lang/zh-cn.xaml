@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ZumaLevelPainter.Resources.Lang"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="Title">Zuma 关卡绘制器 By GScience Studio(一身正气小完能)</system:String>
+    <system:String x:Key="Help" xml:space="preserve">帮助：
+加载参考图像后，直接在图像上绘制曲线，然后按生成可生成文本格式的曲线。
+
+关于曲线绘制：
+按下左键后拖动鼠标即可绘制。
+
+关于图层切换：
+默认第0层，按住Tab可以切换到第1层
+
+关于是否能被打中：
+按下Shift后绘制的曲线不可被打中。</system:String>
+    <system:String x:Key="Layer">当前层：</system:String>
+    <system:String x:Key="Hit">是否可击中：</system:String>
+    <system:String x:Key="PathAccuracy">路径精度：</system:String>
+    <system:String x:Key="PathAccuracyText">指鼠标最小的移动距离</system:String>
+    <system:String x:Key="ClearPointButton">清空</system:String>
+    <system:String x:Key="SetPreviewButton">加载参考图像</system:String>
+    <system:String x:Key="GenerateTXTButton">生成 .TXT</system:String>
+    <system:String x:Key="GenerateDATButton">生成 .DAT</system:String>
+    <system:String x:Key="RailFile">轨道文件</system:String>
+    <system:String x:Key="TextFile">文本文件</system:String>
+    <system:String x:Key="ImageFile">图像文件</system:String>
+    <system:String x:Key="Waypoint">未创建路径点</system:String>
+    <system:String x:Key="SaveSuccessful">保存成功，请使用 Zuma Level Builder 生成二进制文件</system:String>
+    <system:String x:Key="Yes">是</system:String>
+    <system:String x:Key="No">否</system:String>
+</ResourceDictionary>

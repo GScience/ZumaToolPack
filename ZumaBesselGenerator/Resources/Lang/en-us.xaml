@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:ZumaBesselGenerator"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
-    <system:String x:Key="Title">Zuma RailEditor By GScience Studio(一身正气小完能)</system:String>
+    <system:String x:Key="Title">Zuma AI Editor By GScience Studio(一身正气小完能), Translated by DeathKnight</system:String>
     <system:String x:Key="LoadButton">Load</system:String>
     <system:String x:Key="OutputButton">Output</system:String>
     <system:String x:Key="HelpButton">Help</system:String>
@@ -14,7 +14,7 @@
     <system:String x:Key="Resolution">Resolution</system:String>
     <system:String x:Key="AICurve">AI Curve Info</system:String>
 
-    <system:String x:Key="RailFile">Rail File</system:String>
+    <system:String x:Key="RailFile">Zuma DAT File</system:String>
     <system:String x:Key="AIFile">AI File</system:String>
     <system:String x:Key="TextFile">Text File</system:String>
     <system:String x:Key="ImageFile">Image File</system:String>
@@ -25,20 +25,20 @@
     <system:String x:Key="ExpectionToolNotFound">Unable to found ZumaLevelBuilder.exe</system:String>
     <system:String x:Key="ExpectionWrongWidth">Illegal width</system:String>
     <system:String x:Key="ExpectionWrongHeight">Illegal height</system:String>
-    <system:String x:Key="ExpectionWrongCurve">Error has found in ai curve</system:String>
+    <system:String x:Key="ExpectionWrongCurve">Error has been found in the .AI curve</system:String>
     <system:String x:Key="ExpectionWrongUnknownCurve">Unknown curve type </system:String>
-    <system:String x:Key="ExpectionWrongLowPrecision">Some internal point lost. Please check precision.</system:String>
-    <system:String x:Key="ExpectionWrongFileInternalError">Unable to load file because unknown error has found</system:String>
-    <system:String x:Key="ExpectionWrongCantCalculateOffset">Failed to calculate the offset between some point</system:String>
+    <system:String x:Key="ExpectionWrongLowPrecision">Some internal points are lost. Please check precision.</system:String>
+    <system:String x:Key="ExpectionWrongFileInternalError">Unable to load file because unknown error has occurred.</system:String>
+    <system:String x:Key="ExpectionWrongCantCalculateOffset">Failed to calculate the offset between some points.</system:String>
     <system:String x:Key="ExpectionWrongOrderShouldBeNumber">Z should be a number</system:String>
 
     <system:String x:Key="GenerateStarted">Generating. Please wait patiently</system:String>
     <system:String x:Key="TotalPoint">Total point：</system:String>
     <system:String x:Key="PleaseLoadFirst">Please load first</system:String>
 
-    <system:String x:Key="Help1">Made by GScience Studio</system:String>
-    <system:String x:Key="Help2">First of all, you need to draw the curve with Pen Tool in PS</system:String>
-    <system:String x:Key="Help3">Click File->Export->Path to illustrator</system:String>
-    <system:String x:Key="Help4">Press load button and choose the ai file outputed by PS.\rIf it ask you to check precision, you need to make precision smaller</system:String>
-    <system:String x:Key="Help5">Press output to export Zuma path (.dat)</system:String>
+    <system:String x:Key="Help1">Made by GScience Studio, Translated by DeathKnight</system:String>
+    <system:String x:Key="Help2">First, you need to draw the curve with Pen Tool in Photoshop.</system:String>
+    <system:String x:Key="Help3">Click File->Export->Paths to Illustrator...</system:String>
+    <system:String x:Key="Help4">Press Load button and choose the .AIi file outputed by Photoshop. If it asks you to check precision, you need to make precision smaller.</system:String>
+    <system:String x:Key="Help5">Press Output to export as Zuma path (.dat)</system:String>
 </ResourceDictionary>
