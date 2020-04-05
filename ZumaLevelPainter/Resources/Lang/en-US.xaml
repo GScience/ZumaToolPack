@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ZumaLevelPainter.Resources.Lang"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="Title">Zuma Path Painter By GScience Studio, Translated by DeathKnight</system:String>
+    <system:String x:Key="Help" xml:space="preserve">Help:
+After loading the reference image, draw a curve directly on the image and press Generate to generate a curve in text format.
+        
+About curve drawing:
+After pressing the left button, drag the mouse to draw.
+        
+About layer switching:
+The default is layer 0. Press Tab to switch to layer 1.
+        
+Regarding whether it can be hit:
+The curve drawn after holding Shift cannot be hit.
+    </system:String>
+    <system:String x:Key="Layer">Current layer:</system:String>
+    <system:String x:Key="Hit">Whether it can be hit</system:String>
+    <system:String x:Key="PathAccuracy">Path accuracy:</system:String>
+    <system:String x:Key="PathAccuracyText" xml:space="preserve">Refers to the minimum 
+movement distance of the
+mouse</system:String>
+    <system:String x:Key="ExpectionToolNotFound">Unable to find ZumaLevelBuilder.exe</system:String>
+    <system:String x:Key="ClearPointButton">Clear</system:String>
+    <system:String x:Key="SetPreviewButton">Load Image</system:String>
+    <system:String x:Key="GenerateTXTButton">Generate .TXT</system:String>
+    <system:String x:Key="GenerateDATButton">Generate .DAT</system:String>
+    <system:String x:Key="RailFile">Zuma DAT File</system:String>
+    <system:String x:Key="TextFile">Text File</system:String>
+    <system:String x:Key="ImageFile">Image File</system:String>
+    <system:String x:Key="Waypoint">Waypoint not created</system:String>
+    <system:String x:Key="SaveSuccessful">Saved successfully, please use Zuma Level Builder to generate binary files</system:String>
+    <system:String x:Key="Yes">Yes</system:String>
+    <system:String x:Key="No">No</system:String>
+</ResourceDictionary>

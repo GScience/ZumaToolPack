@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 
 namespace ZumaLevelDrawer
@@ -32,6 +33,7 @@ namespace ZumaLevelDrawer
             public int layer;
         }
 
+        ResourceDictionary lang;
         private List<PathPoint> pathPoint = new List<PathPoint>();
 
         private bool canHit = true;
@@ -41,13 +43,32 @@ namespace ZumaLevelDrawer
 
         public ZumaEditor()
         {
+            List<ResourceDictionary> dictionaryList = new List<ResourceDictionary>();
+            foreach (ResourceDictionary dictionary in Application.Current.Resources.MergedDictionaries)
+            {
+                dictionaryList.Add(dictionary);
+            }
+
+            string requestedCulture;
+            if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "zh-CN")
+                requestedCulture = @"Resources\Lang\zh-cn.xaml";
+            else
+                requestedCulture = @"Resources\Lang\en-us.xaml";
+            ResourceDictionary resourceDictionary
+                = dictionaryList.FirstOrDefault(d => d.Source.OriginalString.Equals(requestedCulture));
+
+            Application.Current.Resources.MergedDictionaries.Remove(resourceDictionary);
+            Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+
+            lang = resourceDictionary;
+
             InitializeComponent();
         }
 
         private void SetPreviewButton_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
-            dialog.Filter = "图像文件|*.jpg;*.png;*.gif";
+            dialog.Filter = $"{lang["ImageFile"]}|*.jpg;*.png;*.gif";
             if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
             EditorCanvas.Background = new ImageBrush(new BitmapImage(new Uri(dialog.FileName)));
@@ -135,12 +156,59 @@ namespace ZumaLevelDrawer
         {
             if (pathPoint.Count == 0)
             {
-                MessageBox.Show("未创建路径点");
+                MessageBox.Show(lang["Waypoint"].ToString());
                 return;
             }
 
             var dialog = new SaveFileDialog();
-            dialog.Filter = "文本文件|*.txt";
+            dialog.Filter = $"{lang["TextFile"]}|*.txt";
+            if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                return;
+
+            var file = File.CreateText(dialog.FileName);
+
+            // 开始点
+            var startPoint = pathPoint[0];
+            file.Write((float)startPoint.pos.X);
+            file.Write(" ");
+            file.Write((float)startPoint.pos.Y);
+            file.Write(" ");
+            file.Write(startPoint.canHit ? 0 : 1);
+            file.Write(" ");
+            file.Write(startPoint.layer);
+            file.Write("\r");
+
+            // 后续点
+            for (var i = 1; i < pathPoint.Count; ++i)
+            {
+                var point = pathPoint[i];
+                var offset = point.pos - startPoint.pos;
+
+                file.Write((int)(offset.X * 100));
+                file.Write(" ");
+                file.Write((int)(offset.Y * 100));
+                file.Write(" ");
+                file.Write(point.canHit ? 0 : 1);
+                file.Write(" ");
+                file.Write(point.layer);
+                file.Write("\r");
+
+                startPoint = point;
+            }
+            MessageBox.Show(lang["SaveSuccessful"].ToString());
+
+            file.Close();
+        }
+        private void GenerateButton2_Click(object sender, RoutedEventArgs e)
+        {
+            if (pathPoint.Count == 0)
+            {
+                MessageBox.Show("Waypoint not created");
+                return;
+            }
+
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "Text file|*.txt";
             if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
 
@@ -175,17 +243,28 @@ namespace ZumaLevelDrawer
                 startPoint = point;
             }
 
-            MessageBox.Show("保存成功，请使用 Zuma Level Builder 生成二进制文件");
-
+            MessageBox.Show("Saved successfully, press OK to generate .dat file");
+            var levelGeneratorPath = Environment.CurrentDirectory+"\\ZumaLevelBuilder.exe";
+            if (!File.Exists(levelGeneratorPath))
+            {
+                MessageBox.Show(lang["ExpectionToolNotFound"].ToString());
+                return;
+            }
+            string name = dialog.FileName;
+            name = name.Replace(".txt", "");
+            var process = Process.Start(levelGeneratorPath, $"\"{name + ".txt"}\" \"{name}\"");
+            if (!process.WaitForExit(10000) || process.ExitCode != 0)
+            {
+                process.Kill();
+            }
             file.Close();
         }
-
         private void RefreshCurrentState()
         {
             if (canHit)
-                CanHitLabel.Content = "是";
+                CanHitLabel.Content = $"{lang["Yes"]}";
             else
-                CanHitLabel.Content = "否";
+                CanHitLabel.Content = $"{lang["No"]}";
 
             LayerLabel.Content = layer;
         }
