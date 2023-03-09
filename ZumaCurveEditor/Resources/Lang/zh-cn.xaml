@@ -1,0 +1,57 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ZumaBesselGenerator"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="Title">祖玛制轨器 由一身正气小完能(GScience Studio)制作，后由抹蜜的蜂(LookingForDreams)改进</system:String>
+    <system:String x:Key="LoadButton">加载</system:String>
+    <system:String x:Key="ClearButton">清屏</system:String>
+    <system:String x:Key="OutputButton">导出</system:String>
+    <system:String x:Key="HelpButton">帮助</system:String>
+    <system:String x:Key="BackgroundButton">背景</system:String>
+    <system:String x:Key="BrushSize">笔刷大小</system:String>
+    <system:String x:Key="Tunnel">隧道</system:String>
+    <system:String x:Key="Continue">连续</system:String>
+    <system:String x:Key="Precision">精度</system:String>
+    <system:String x:Key="Resolution">AI 分辨率</system:String>
+    <system:String x:Key="Instructions">使用说明</system:String>
+    <system:String x:Key="Content" xml:space="preserve">基本操作流程：&#xA;1.首先在PhotoShop里使用钢笔工具绘制路径。&#xA;2.点击 文件->导出->路径到illustrator。&#xA;3.在制轨器中点击加载，然后选择导出的ai文件。若显示精度问题，则需要把精度调的更小，一般不会出现问题。&#xA;4.点击导出来生成祖玛轨道dat文件。&#xA;&#xA;进一步学习：&#xA;1.PS->图像->图像大小->分辨率 最好设置为72像素/英寸，否则导出的ai文件分辨率会变化，造成精确度下降。&#xA;2.此制轨器允许加载或导出ai、dat、txt三种类型的文件，也允许一次加载多条轨道，需要重新加载时点击清屏即可。比如，可以在PS中绘制多条钢笔路径，导出包含多条轨道的ai文件并在制轨器中加载。&#xA;3.画布大小默认为640×480像素，这是祖玛豪华版（zd）原版的分辨率。可以根据自己的需求将画布大小改成高分辨率系列zd的分辨率。&#xA;4.底部的截取范围、表达式、反向属于附加功能，可以用来进行一些必要的进阶操作，若需要使用请先加载轨道，进行相关设置后点击确定再点击导出。附加功能中最难的是表达式，因为它涉及到线性变换知识。若画布宽度为w，高度为h，这里列出一些基本的线性变换公式（注：原点在画布左上角，x轴向右，y轴向下）：&#xA;（1）平移s像素：x=x+s或y=y+s&#xA;（2）缩放s倍：x=x*s，y=y*s&#xA;（3）水平翻转：x=w-x，垂直翻转：y=h-y&#xA;（4）顺时针旋转θ角度：x=(x-w/2)*cos(θ)-(y-h/2)*sin(θ)+w/2且y=(x-w/2)*sin(θ)+(y-h/2)*cos(θ)+h/2&#xA;5.以上讲的是祖玛豪华版，它同样适用于祖玛的复仇。不同的是，祖玛的复仇把轨道难度写在了dat文件里，所以需要在制轨器中设置这些难度。&#xA;6.祖玛的复仇支持瞬移，需要使用时请先按顺序加载多条轨道，并且勾选瞬移后再导出dat文件。</system:String>
+    <system:String x:Key="CanvasResolution">画布大小</system:String>
+    <system:String x:Key="Z">层数顺序</system:String>
+    <system:String x:Key="zd">祖玛豪华版</system:String>
+    <system:String x:Key="zr">祖玛的复仇</system:String>
+    <system:String x:Key="hide">隐藏骷髅</system:String>
+    <system:String x:Key="invincible">无敌</system:String>
+    <system:String x:Key="warp">瞬移</system:String>
+    <system:String x:Key="xExpression">x表达式</system:String>
+    <system:String x:Key="yExpression">y表达式</system:String>
+    <system:String x:Key="Range">截取范围：从</system:String>
+    <system:String x:Key="To">到</system:String>
+    <system:String x:Key="Invert">反向</system:String>
+    <system:String x:Key="curve">轨道</system:String>
+    <system:String x:Key="OK">确定</system:String>
+
+    <system:String x:Key="RailFile">轨道文件</system:String>
+    <system:String x:Key="AIFile">AI文件</system:String>
+    <system:String x:Key="TextFile">文本文件</system:String>
+    <system:String x:Key="ImageFile">图像文件</system:String>
+    <system:String x:Key="AllFile">所有文件</system:String>
+
+    <system:String x:Key="Exception">出现异常，生成失败</system:String>
+    <system:String x:Key="ExceptionError">[错误]</system:String>
+    <system:String x:Key="ExceptionWarn">[警告]</system:String>
+    <system:String x:Key="ExceptionWrongWidth">宽度非法</system:String>
+    <system:String x:Key="ExceptionWrongHeight">高度非法</system:String>
+    <system:String x:Key="ExceptionWrongCurve">曲线信息出现错误</system:String>
+    <system:String x:Key="ExceptionWrongUnknownCurve">未知曲线信息</system:String>
+    <system:String x:Key="ExceptionWrongLowPrecision">缺失部分中间点，可能无法导出，请修改精度</system:String>
+    <system:String x:Key="ExceptionWrongHead">头信息错误</system:String>
+    <system:String x:Key="ExceptionWrongFileInternalError">无法加载文件，文件内有错误</system:String>
+    <system:String x:Key="ExceptionWrongCantCalculateOffset">生成失败，无法计算偏移量</system:String>
+    <system:String x:Key="ExceptionWrongOrderShouldBeNumber">Z顺序必须为数字</system:String>
+    <system:String x:Key="ExceptionWrongLoad">无法加载此文件</system:String>
+    <system:String x:Key="ExceptionWrongExpression">表达式有误</system:String>
+    <system:String x:Key="ExceptionWrongEnter">文本框中应输入数字</system:String>
+
+    <system:String x:Key="GenerateStarted">开始生成，程序可能会出现卡顿，请耐心等待</system:String>
+    <system:String x:Key="TotalPoint">总点数：</system:String>
+</ResourceDictionary>

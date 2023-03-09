@@ -1,0 +1,56 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ZumaBesselGenerator"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="Title">Zuma Curve Editor By GScience Studio(一身正气小完能), Improved By LookingForDreams(抹蜜的蜂)</system:String>
+    <system:String x:Key="LoadButton">Load</system:String>
+    <system:String x:Key="ClearButton">Clear</system:String>
+    <system:String x:Key="OutputButton">Export</system:String>
+    <system:String x:Key="HelpButton">Help</system:String>
+    <system:String x:Key="BackgroundButton">Background</system:String>
+    <system:String x:Key="BrushSize">Brush size</system:String>
+    <system:String x:Key="Tunnel">Tunnel</system:String>
+    <system:String x:Key="Continue">Continue</system:String>
+    <system:String x:Key="Precision">Precision</system:String>
+    <system:String x:Key="Resolution">AI Resolution</system:String>
+    <system:String x:Key="Instructions">Instructions</system:String>
+    <system:String x:Key="Content" xml:space="preserve">Basic operation process:&#xA;1. First, you need to draw the curve with Pen Tool in Photoshop.&#xA;2. Click File->Export->Paths to Illustrator...&#xA;3. Press Load button and choose the .ai file exported by Photoshop. If it asks you to check precision, you need to make precision smaller.&#xA;4.Press Export to export as Zuma path (.dat)&#xA;&#xA;Further study:&#xA;1. PS->Image->Image Size->Resolution is best to set to 72 Pixels/Inch, otherwise the resolution of AI will change and the accuracy will decrease.&#xA;2. This curve editor allows you to load or export ai, dat, and txt files. It also allows you to load multiple curves at one time. Click Clear when you need to reload. For example, you can draw multiple Pen paths in PS, export ai files containing multiple curves, and load them in the curve editor.&#xA;3. The default canvas size is 640×480 pixels, which is the resolution of the original Zuma Deluxe (zd). You can change the canvas size to the resolution of the high-resolution series zd according to your needs.&#xA;4. Cut range, expression and invert at the bottom are additional functions that can be used for some necessary advanced operations. If you need to use them, please load curves first, make relevant settings, and then click OK and then click Export. The most difficult of the additional functions is the expression, because it involves linear transformation knowledge. If the canvas width is w and the height is h, here are some basic linear transformation formulas (Note: the origin is in the upper left corner of the canvas, the x-axis is right, and the y-axis is down):&#xA; (1) Translate s pixels: x=x+s or y=y+s&#xA; (2) Scale s times: x=x*s, y=y*s&#xA; (3) Horizontal flip: x=w-x, Vertical flip: y=h-y&#xA; (4) Rotate θ angle clockwise: x=(x-w/2)*cos(θ)-(y-h/2)*sin(θ)+w/2 and y=(x-w/2)*sin(θ)+(y-h/2)*cos(θ)+h/2&#xA;5. The above is Zuma Deluxe, which is also applicable to Zuma's Revenge. The difference is that Zuma's Revenge writes the curve difficulty in the dat file, so we need to set these difficulties in the curve editor.&#xA;6. Zuma's Revenge supports warp. When you need to use it, please load multiple curves in sequence, and check Warp before exporing the dat file.</system:String>    <system:String x:Key="CanvasResolution">Canvas size</system:String>
+    <system:String x:Key="Z">Layer order</system:String>
+    <system:String x:Key="zd">Zuma Deluxe</system:String>
+    <system:String x:Key="zr">Zuma's Revenge</system:String>
+    <system:String x:Key="hide">Hide skull</system:String>
+    <system:String x:Key="invincible">Invincible</system:String>
+    <system:String x:Key="warp">Warp</system:String>
+    <system:String x:Key="xExpression">x expression</system:String>
+    <system:String x:Key="yExpression">y expression</system:String>
+    <system:String x:Key="Range">Cut range: From</system:String>
+    <system:String x:Key="To">To</system:String>
+    <system:String x:Key="Invert">Invert</system:String>
+    <system:String x:Key="curve">Curve</system:String>
+    <system:String x:Key="OK">OK</system:String>
+
+    <system:String x:Key="RailFile">Zuma DAT File</system:String>
+    <system:String x:Key="AIFile">AI File</system:String>
+    <system:String x:Key="TextFile">Text File</system:String>
+    <system:String x:Key="ImageFile">Image File</system:String>
+    <system:String x:Key="AllFile">All File</system:String>
+
+    <system:String x:Key="Exception">Unknown exception has found</system:String>
+    <system:String x:Key="ExceptionError">[Error]</system:String>
+    <system:String x:Key="ExceptionWarn">[Warning]</system:String>
+    <system:String x:Key="ExceptionWrongWidth">Illegal width</system:String>
+    <system:String x:Key="ExceptionWrongHeight">Illegal height</system:String>
+    <system:String x:Key="ExceptionWrongCurve">Error has been found in the .AI curve</system:String>
+    <system:String x:Key="ExceptionWrongUnknownCurve">Unknown curve type </system:String>
+    <system:String x:Key="ExceptionWrongLowPrecision">Some internal points are lost. Please check precision.</system:String>
+    <system:String x:Key="ExceptionWrongHead">Header is wrong.</system:String>
+    <system:String x:Key="ExceptionWrongFileInternalError">Unable to load file because unknown error has occurred.</system:String>
+    <system:String x:Key="ExceptionWrongCantCalculateOffset">Failed to calculate the offset between some points.</system:String>
+    <system:String x:Key="ExceptionWrongOrderShouldBeNumber">Z should be a number</system:String>
+    <system:String x:Key="ExceptionWrongLoad">Unable to load the file</system:String>
+    <system:String x:Key="ExceptionWrongExpression">Wrong expression</system:String>
+    <system:String x:Key="ExceptionWrongEnter">Enter number in textbox</system:String>
+
+    <system:String x:Key="GenerateStarted">Generating. Please wait patiently</system:String>
+    <system:String x:Key="TotalPoint">Total point：</system:String>
+</ResourceDictionary>
